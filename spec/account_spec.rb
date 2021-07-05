@@ -16,5 +16,10 @@ describe "account" do
       acc.deposit(550)
       expect(acc.balance).to eq(550)
     end
+
+    it 'can withdraw money from the account' do 
+      acc.withdraw(500)
+      expect(acc.balance).to eq(50) 
+    end
   
 end
