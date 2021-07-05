@@ -21,5 +21,11 @@ describe "account" do
       acc.withdraw(500)
       expect(acc.balance).to eq(50) 
     end
+
+    it 'adds a deposit to the history' do 
+      acc.stub(:print_statement).and_return("It Works")
+      expect(acc.print_statement).to eq("It Works")
+    end
+    
   
 end
