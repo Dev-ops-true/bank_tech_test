@@ -1,8 +1,10 @@
+require 'terminal-table'
+
 class Account
 
   attr_reader :balance, :history
 
-  def initialize(balance = 0, history = [{"date" => [], "credit" => [], "debit" => [], "balance"=> []}]) 
+  def initialize(balance = 0, history = []) 
     @balance = balance 
     @history = history
   end
@@ -18,10 +20,14 @@ class Account
   end
 
   def print_statement
+    rows = []
     @history.each do |history|
-    puts "#{history[:date]} #{history[:credit]} #{history[:debit]} #{history[:balance]}".center(60)
+      rows << [history[:date], history[:credit], history[:debit], history[:balance]]
     end
+    table = Terminal::Table.new headings: %w[Date Credit Debit Balance], rows: rows
+    puts table
   end
+
 
   private
 

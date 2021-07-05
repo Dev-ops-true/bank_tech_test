@@ -23,6 +23,7 @@ describe "account" do
     end
 
     it 'adds a deposit to the history' do 
+      acc.print_statement
       acc.stub(:print_statement).and_return("It Works")
       expect(acc.print_statement).to eq("It Works")
     end
