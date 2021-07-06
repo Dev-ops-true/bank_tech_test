@@ -1,44 +1,32 @@
 # frozen_string_literal: true
 require 'terminal-table'
+require 'statement'
 
 class Account
-  attr_reader :balance, :history
+  attr_reader :balance, :statement
 
-  def initialize(balance = 0, history = [])
+  def initialize(balance = 0)
     @balance = balance
-    @history = history
+    @statement = Statement.new
   end
 
   def deposit(money)
     @balance += money
-    add_deposit(money)
+    @statement.add_deposit(money)
   end
 
   def withdraw(money)
     @balance -= money
-    add_withdraw(money)
+    @statement.add_withdraw(money)
   end
 
   def print_statement
     rows = []
-    @history.each do |history|
-      rows << [history[:date], history[:credit], history[:debit], history[:balance]]
+    @statement.each do |statement|
+      rows << [statement[:date], statement[:credit], statement[:debit], statement[:balance]]
     end
     table = Terminal::Table.new headings: %w[Date Credit Debit Balance], rows: rows
     puts table
   end
 
-  private
-
-  def add_withdraw(date = current_time, money)
-    @history << { date: date, credit: 0, debit: money, balance: @balance }
-  end
-
-  def add_deposit(date = current_time, money)
-    @history << { date: date, credit: money, debit: 0, balance: @balance }
-  end
-
-  def current_time
-    Time.now.strftime('%d/%m/%Y')
-  end
 end
