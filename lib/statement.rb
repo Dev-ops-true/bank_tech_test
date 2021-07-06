@@ -25,7 +25,6 @@ class Statement
   end
 
   private
-
   def current_time
     Time.now.strftime('%d/%m/%Y')
   end
