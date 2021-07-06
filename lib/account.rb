@@ -1,11 +1,11 @@
+# frozen_string_literal: true
 require 'terminal-table'
 
 class Account
-
   attr_reader :balance, :history
 
-  def initialize(balance = 0, history = []) 
-    @balance = balance 
+  def initialize(balance = 0, history = [])
+    @balance = balance
     @history = history
   end
 
@@ -28,20 +28,17 @@ class Account
     puts table
   end
 
-
   private
 
   def add_withdraw(date = current_time, money)
-    @history << {date: date, credit: 0, debit: money, balance:@balance}
+    @history << { date: date, credit: 0, debit: money, balance: @balance }
   end
 
   def add_deposit(date = current_time, money)
-    @history << {date: date, credit: money, debit: 0, balance:@balance}
+    @history << { date: date, credit: money, debit: 0, balance: @balance }
   end
 
   def current_time
-    Time.now.strftime("%d/%m/%Y")
+    Time.now.strftime('%d/%m/%Y')
   end
-
 end
-
