@@ -2,39 +2,40 @@
 
 require 'account'
 
-describe 'account' do
-  acc = Account.new
-
-  it 'creates a new instance of Account' do
-    expect(acc).to be_a(Account)
+describe Account do
+  before :each do
+    @acc = Account.new
   end
 
-  it 'initializes a new account with a balance of 0' do
-    expect(acc.balance).to eq(0)
-  end
-end
+  describe 'account' do
+    it 'creates a new instance of Account' do
+      expect(@acc).to be_a(Account)
+    end
 
-describe '#deposit' do
-  it 'deposits money into the account' do
-    acc = Account.new
-    acc.deposit(550)
-    expect(acc.balance).to eq(550)
+    it 'initializes a new account with a balance of 0' do
+      expect(@acc.balance).to eq(0)
+    end
   end
-end
 
-describe '#withdraw' do
-  it 'can withdraw money from the account' do
-    acc = Account.new
-    acc.deposit(550)
-    acc.withdraw(500)
-    expect(acc.balance).to eq(50)
+  describe '#deposit' do
+    it 'deposits money into the account' do
+      @acc.deposit(550)
+      expect(@acc.balance).to eq(550)
+    end
   end
-end
 
-describe '#print_statement' do
-  it 'printing a statement' do
-    acc = Account.new
-    acc.stub(:print_statement).and_return('It Works')
-    expect(acc.print_statement).to eq('It Works')
+  describe '#withdraw' do
+    it 'can withdraw money from the account' do
+      @acc.deposit(550)
+      @acc.withdraw(500)
+      expect(@acc.balance).to eq(50)
+    end
+  end
+
+  describe '#print' do
+    it 'prints a statement' do
+      @acc.stub(:print).and_return('This is your statement')
+      expect(@acc.print).to eq('This is your statement')
+    end
   end
 end
