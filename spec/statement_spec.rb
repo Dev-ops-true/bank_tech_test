@@ -19,7 +19,7 @@ describe Statement do
       expect(@statement.statement[0][:debit]).to eq(100)
     end
 
-    it 'is able to hold a withdrawel' do 
+    it 'is able to hold a withdrawel' do
       @statement.add_withdraw(100, 0)
       expect(@statement.statement.length).to eq(1)
     end

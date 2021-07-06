@@ -7,11 +7,11 @@ class Statement
     @statement = statement
   end
 
-  def add_withdraw(date = current_time, money, balance)
+  def add_withdraw(money, balance, date = current_time)
     @statement << { date: date, credit: 0, debit: money, balance: balance }
   end
 
-  def add_deposit(date = current_time, money, balance)
+  def add_deposit(money, balance, date = current_time)
     @statement << { date: date, credit: money, debit: 0, balance: balance }
   end
 
@@ -25,6 +25,7 @@ class Statement
   end
 
   private
+
   def current_time
     Time.now.strftime('%d/%m/%Y')
   end
