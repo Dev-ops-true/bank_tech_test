@@ -4,24 +4,38 @@ require 'terminal-table'
 require './lib/statement'
 
 class Account
-  attr_accessor :balance, :statement
+  attr_accessor :balance, :history
 
-  def initialize(balance = 0)
+  def initialize(balance = 0, history = [])
     @balance = balance
-    @statement = Statement.new
+    @history = history
   end
 
   def deposit(money)
     @balance += money
-    @statement.add_deposit(money, @balance)
+    add_deposit(money, @balance)
   end
 
   def withdraw(money)
     @balance -= money
-    @statement.add_withdraw(money, @balance)
+    add_withdraw(money, @balance)
+  end
+
+  def add_withdraw(money, balance, date = current_time)
+    @history << { date: date, credit: 0, debit: money, balance: @balance }
+  end
+
+  def add_deposit(money, balance, date = current_time)
+    @history<< { date: date, credit: money, debit: 0, balance: @balance }
   end
 
   def print
-    @statement.print_statement
+    @history.print_statement
+  end
+
+  private
+
+  def current_time
+    Time.now.strftime('%d/%m/%Y')
   end
 end

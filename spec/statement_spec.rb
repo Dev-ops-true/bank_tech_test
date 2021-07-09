@@ -13,24 +13,7 @@ describe Statement do
     end
   end
 
-  describe '#add_withdraw' do
-    it 'adds a withdrawel to a statement' do
-      @statement.add_withdraw(100, 0)
-      expect(@statement.statement[0][:debit]).to eq(100)
-    end
 
-    it 'is able to hold a withdrawel' do
-      @statement.add_withdraw(100, 0)
-      expect(@statement.statement.length).to eq(1)
-    end
-  end
-
-  describe '#add_deposit' do
-    it 'adds a deposit to a statement' do
-      @statement.add_deposit(100, 0)
-      expect(@statement.statement[0][:credit]).to eq(100)
-    end
-  end
 
   describe '#print_statement' do
     it 'printing a statement' do
