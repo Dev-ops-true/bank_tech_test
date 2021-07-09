@@ -19,7 +19,6 @@ describe Account do
 
   describe '#deposit' do
     it 'deposits money into the account' do
-      p @acc
       @acc.deposit(550)
       expect(@acc.balance).to eq(550)
     end

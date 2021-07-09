@@ -22,15 +22,20 @@ class Account
   end
 
   def add_withdraw(money, balance, date = current_time)
-    @history << { date: date, credit: 0, debit: money, balance: @balance }
+    @history << { date: date, credit: "", debit: money, balance: @balance }
   end
 
   def add_deposit(money, balance, date = current_time)
-    @history<< { date: date, credit: money, debit: 0, balance: @balance }
+    @history<< { date: date, credit: money, debit: "", balance: @balance }
   end
 
   def print
-    @history.print_statement
+    rows = []
+    @history.each do |statement|
+      rows << [statement[:date], statement[:credit], statement[:debit], statement[:balance]]
+    end
+    table = Terminal::Table.new headings: %w[Date Credit Debit Balance], rows: rows
+    puts table
   end
 
   private
